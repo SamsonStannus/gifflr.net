@@ -25,17 +25,17 @@ def findGif():
 
 		if no_punct:
 			words = no_punct.split()
+			notecount = []
 			if len(words) > 2:
-				tumresp = tumclient.tagged(no_punct+' gif', limit = 5000)
+				tumresp = tumclient.tagged(no_punct+' gif', limit = 20)
 				for x in xrange(0,len(tumresp)):
 			 			if 'photos' in tumresp[x]:
 			 				notecount.append(tumresp[x]['note_count'])
 				if notecount:	
 		 			notecount.sort()
-		 			notecount.reverse()
 
 		 			for i in xrange(0,len(tumresp)):
-		 				if(tumresp[i]['note_count'] == notecount[0]):
+		 				if(tumresp[i]['note_count'] == notecount[-1]):
 		 					return direct(tumresp[i]['photos'][0]['original_size']['url'])
 		else: 
 			words = []
@@ -59,16 +59,15 @@ def findGif():
 				
 		# 		if notecount:
 		# 			notecount.sort()
-		# 			notecount.reverse()
 
 		# 			for i in xrange(0,len(tumresp)):
-		# 				if(tumresp[i]['note_count'] == notecount[0]):
+		# 				if(tumresp[i]['note_count'] == notecount[-1]):
 		# 					finalists.append(tumresp[i])
 
 		if len(words) > 1 and not finalists:
 			for e in permutations(words, 2):
 				d = ' '.join(elem for elem in e)
-				tumresp = tumclient.tagged(d+' gif', limit = 5000)
+				tumresp = tumclient.tagged(d+' gif', limit = 20)
 				notecount = []
 				index = 0
 
@@ -78,16 +77,15 @@ def findGif():
 				
 				if notecount:
 					notecount.sort()
-					notecount.reverse()
 
 					for i in xrange(0,len(tumresp)):
-						if(tumresp[i]['note_count'] == notecount[0]):
+						if(tumresp[i]['note_count'] == notecount[-1]):
 							finalists.append(tumresp[i])
 
 		if len(words) > 0 and not finalists:
 			for e in words:
 
-				tumresp = tumclient.tagged(e+' gif', limit = 5000)
+				tumresp = tumclient.tagged(e+' gif', limit = 20)
 				notecount = []
 				index = 0
 
@@ -97,10 +95,9 @@ def findGif():
 				
 				if notecount:
 					notecount.sort()
-					notecount.reverse()
 
 					for i in xrange(0,len(tumresp)):
-						if(tumresp[i]['note_count'] == notecount[0]):
+						if(tumresp[i]['note_count'] == notecount[-1]):
 							finalists.append(tumresp[i])
 				
 		if finalists:
@@ -109,19 +106,18 @@ def findGif():
 				notecount.append(finalists[x]['note_count'])
 
 			notecount.sort()
-			notecount.reverse()
 
 			for i in xrange(0,len(finalists)):
-				if(finalists[i]['note_count'] == notecount[0]):
+				if(finalists[i]['note_count'] == notecount[-1]):
 					index = i
 
 		tumurl = finalists[index]['photos'][0]['original_size']['url']
 	except IndexError:
 		tumurl = '/'
 	except KeyError:
-		tumurl = '/'
+		tumurl = 'http://www.dabeagle.com/images/old-golden-key.jpg'
 	except UnboundLocalError:
-		tumurl = '/'
+		tumurl = 'http://columbusfol.files.wordpress.com/2013/10/fol-art-unbound-invite-front1.jpg'
 	except UnicodeEncodeError:
 		tumurl = '/'
 
