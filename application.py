@@ -80,7 +80,7 @@ def findGif():
 	except KeyError:
 		tumurl = '/'
 
-	return tumurl
+	return redirect(tumurl)
 
 if __name__ == '__main__':
 	app.run(debug = True)
