@@ -61,7 +61,11 @@
             margin-left: 10px; 
             color: #999999; 
             } 
-           
+    #foo {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+  }
         .submit input { 
             width: auto; 
             padding: 9px 15px; 
@@ -72,6 +76,7 @@
             -webkit-border-radius: 5px; 
             -moz-border-radius: 5px; 
             }
+
         input {
           padding: 13px; font-size: 50px;
           color: #000;
@@ -99,14 +104,19 @@
         });
       </script>
 
+    <script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'e79e6f66-a34a-4731-af52-3eb8014acc17'});</script>
+
   </head>
-  <body>
+  <body style="overflow: hidden">
     
     <div style="position: absolute; width:100%; text-align:center; top: 11%" >
       <a href="/"><img src="http://i.imgur.com/UW1IjfX.png" alt="giffr." height="250" width="500"><a>
     </div>
     <form action="/gifs" method="post" name="stringform">
-      <input type="text" size="300" placeholder="Type a sentence, see what happens..." name="string" class="submit_on_enter">
+      <input type="text" size="300" placeholder="Type something, see what happens..." name="string" class="submit_on_enter">
     </form>
+      <div id = "foo">
+        <span st_url='{Permalink}' st_title='{Title}' class='st_tumblr_large' displayText='Tumblr'></span><span st_url='{Permalink}' st_title='{Title}' class='st_pinterest_large' displayText='Pinterest'></span><span st_url='{Permalink}' st_title='{Title}' class='st_reddit_large' displayText='Reddit'></span><span st_url='{Permalink}' st_title='{Title}' class='st_twitter_large' displayText='Tweet'></span><span st_url='{Permalink}' st_title='{Title}' class='st_facebook_large' displayText='Facebook'></span><span st_url='{Permalink}' st_title='{Title}' class='st_email_large' displayText='Email'></span>
+        </div>
   </body>
 </html>
