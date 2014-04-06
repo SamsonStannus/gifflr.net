@@ -28,7 +28,7 @@ def findGif():
 		words = []
 
 	if len(words) == 1 and words[0] == 'gifflr':
-		return 'http://24.media.tumblr.com/d9ae3dc755c0fd52cd2f883c7d8c719d/tumblr_n10ym69M5i1tro5x0o1_500.gif'
+		return redirect('http://24.media.tumblr.com/d9ae3dc755c0fd52cd2f883c7d8c719d/tumblr_n10ym69M5i1tro5x0o1_500.gif')
 
 	finalists = []
 
