@@ -115,9 +115,9 @@ def findGif():
 	except IndexError:
 		tumurl = '/'
 	except KeyError:
-		tumurl = 'http://www.dabeagle.com/images/old-golden-key.jpg'
+		tumurl = '/'
 	except UnboundLocalError:
-		tumurl = 'http://columbusfol.files.wordpress.com/2013/10/fol-art-unbound-invite-front1.jpg'
+		tumurl = '/'
 	except UnicodeEncodeError:
 		tumurl = '/'
 
