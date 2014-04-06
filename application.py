@@ -26,6 +26,7 @@ def findGif():
 		words = no_punct.split()
 	else: 
 		words = []
+	
 	finalists = []
 
 	for e in words:
