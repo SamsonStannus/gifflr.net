@@ -26,7 +26,7 @@ def findGif():
 		words = no_punct.split()
 	else: 
 		words = []
-	
+
 	finalists = []
 
 	for e in words:
@@ -77,11 +77,14 @@ def findGif():
 		for i in xrange(0,len(finalists)):
 			if(finalists[i]['note_count'] == notecount[0]):
 				index = i
+
 	try:
 		tumurl = finalists[index]['photos'][0]['original_size']['url']
 	except IndexError:
 		tumurl = '/'
 	except KeyError:
+		tumurl = '/'
+	except UnboundLocalError:
 		tumurl = '/'
 
 	return redirect(tumurl)
