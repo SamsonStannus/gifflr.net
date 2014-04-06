@@ -22,7 +22,10 @@ def findGif():
 	   if char not in punctuation:
 	       no_punct = no_punct + char
 
-	words = no_punct.split()
+	if no_punct:
+		words = no_punct.split()
+	else: 
+		words = []
 	finalists = []
 
 	for e in words:
