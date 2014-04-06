@@ -25,6 +25,18 @@ def findGif():
 
 		if no_punct:
 			words = no_punct.split()
+			if len(words) > 2:
+				tumresp = tumclient.tagged(no_punct+' gif', limit = 5000)
+				for x in xrange(0,len(tumresp)):
+			 			if 'photos' in tumresp[x]:
+			 				notecount.append(tumresp[x]['note_count'])
+				if notecount:	
+		 			notecount.sort()
+		 			notecount.reverse()
+
+		 			for i in xrange(0,len(tumresp)):
+		 				if(tumresp[i]['note_count'] == notecount[0]):
+		 					return direct(tumresp[i]['photos'][0]['original_size']['url'])
 		else: 
 			words = []
 
@@ -32,6 +44,7 @@ def findGif():
 			return redirect('http://24.media.tumblr.com/d9ae3dc755c0fd52cd2f883c7d8c719d/tumblr_n10ym69M5i1tro5x0o1_500.gif')
 
 		finalists = []
+
 
 		# if len(words) > 2:
 		# 	for e in permutations(words, 3):
