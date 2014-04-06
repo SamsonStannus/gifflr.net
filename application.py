@@ -36,7 +36,7 @@ def findGif():
 
 		 			for i in xrange(0,len(tumresp)):
 		 				if(tumresp[i]['note_count'] == notecount[-1]):
-		 					return direct(tumresp[i]['photos'][0]['original_size']['url'])
+		 					return redirect(tumresp[i]['photos'][0]['original_size']['url'])
 		else: 
 			words = []
 
