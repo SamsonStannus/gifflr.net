@@ -33,7 +33,26 @@ def findGif():
 
 		finalists = []
 
-		if len(words) > 1:
+		# if len(words) > 2:
+		# 	for e in permutations(words, 3):
+		# 		d = ' '.join(elem for elem in e)
+		# 		tumresp = tumclient.tagged(d+' gif', limit = 5000)
+		# 		notecount = []
+		# 		index = 0
+
+		# 		for x in xrange(0,len(tumresp)):
+		# 			if 'photos' in tumresp[x]:
+		# 				notecount.append(tumresp[x]['note_count'])
+				
+		# 		if notecount:
+		# 			notecount.sort()
+		# 			notecount.reverse()
+
+		# 			for i in xrange(0,len(tumresp)):
+		# 				if(tumresp[i]['note_count'] == notecount[0]):
+		# 					finalists.append(tumresp[i])
+
+		if len(words) > 1 and not finalists:
 			for e in permutations(words, 2):
 				d = ' '.join(elem for elem in e)
 				tumresp = tumclient.tagged(d+' gif', limit = 5000)
@@ -52,7 +71,7 @@ def findGif():
 						if(tumresp[i]['note_count'] == notecount[0]):
 							finalists.append(tumresp[i])
 
-		if len(words)==1 or not finalists:
+		if len(words) > 0 and not finalists:
 			for e in words:
 
 				tumresp = tumclient.tagged(e+' gif', limit = 5000)
