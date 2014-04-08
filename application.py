@@ -38,8 +38,8 @@ def findGif():
 						if 'photos' in tumresp[x]:
 							posts[tumresp[x]['id']] = tumresp[x]['note_count']
 
-					if posts:
-						for count in range(0,6):
+					for count in range(0,6):
+						if posts:
 							key = max(posts.iteritems(), key=operator.itemgetter(1))[0]
 							for ind in range(0,len(tumresp)):
 								if key == tumresp[ind]['id']:
@@ -48,7 +48,7 @@ def findGif():
 							del posts[key]
 
 		if finalists:
-			index = randrange(0,5,1)
+			index = randrange(0,len(finalists),1)
 
 		tumurl = finalists[index]['photos'][0]['original_size']['url']
 	except IndexError:
