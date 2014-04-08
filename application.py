@@ -17,7 +17,7 @@ def findGif():
 		  'Kjr56gcuNUtyRDZfhy6rsmmv5cUatTzcVlGg2MsDh67Wq23MxM',)
 		gifstring = request.values.get('string')
 
-		punctuation = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+		punctuation = '''!()-[]{};:"\,<>./?@#$%^&*_~'''
 		no_punct = ""
 		for char in gifstring:
 		   if char not in punctuation:
@@ -28,6 +28,9 @@ def findGif():
 		index = 0
 		posts = {}
 
+		if len(words) > 8:
+			return redirect('/')
+			
 		for num in range(len(words)-1,-1,-1):
 			for e in combinations(words, num+1):
 				if not finalists:
