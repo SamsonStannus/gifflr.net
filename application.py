@@ -63,7 +63,8 @@ def findGif():
 	except UnicodeEncodeError:
 		tumurl = '/'
 
-	return redirect(tumurl)
+	# return redirect(tumurl)
+	return render_template('index.html', tumurl=tumurl)
 
 if __name__ == '__main__':
 	app.run(debug = True)
