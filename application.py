@@ -55,13 +55,13 @@ def findGif():
 
 		tumurl = finalists[index]['photos'][0]['original_size']['url']
 	except IndexError:
-		tumurl = '/'
+		tumurl = 'Nope, either there\'s no relevant gif, or tumblr didn\'t like the dirty thing you searched...'
 	except KeyError:
-		tumurl = '/'
+		tumurl = 'Nope, either there\'s no relevant gif, or tumblr didn\'t like the dirty thing you searched...'
 	except UnboundLocalError:
-		tumurl = '/'
+		tumurl = 'Nope, either there\'s no relevant gif, or tumblr didn\'t like the dirty thing you searched...'
 	except UnicodeEncodeError:
-		tumurl = '/'
+		tumurl = 'Nope, either there\'s no relevant gif, or tumblr didn\'t like the dirty thing you searched...'
 
 	# return redirect(tumurl)
 	return render_template('index.html', tumurl=tumurl)
