@@ -127,6 +127,11 @@ body {
     border: 3px solid #ED1C24;
     outline: none;
 }
+
+.gifs {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 /*===================*/
 
 /*
@@ -260,9 +265,10 @@ body {
           </div>
 
           <div class="inner cover">
-
-            <img src="{{tumurl}}">
+            <div class="gifs">
+              <img src="{{tumurl}}">
                 <p>{{tumurl}}<p>
+            </div>
     
             <form action="/gifs" method="post" name="stringform">
               <div class="row">
