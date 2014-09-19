@@ -64,7 +64,7 @@ def findGif():
 		tumurl = 'Nope, either there\'s no relevant gif, or tumblr didn\'t like the dirty thing you searched...'
 
 	# return redirect(tumurl)
-	return render_template('index.html', tumurl=tumurl)
+	return render_template('gif.html', tumurl=tumurl, gifstring=gifstring)
 
 if __name__ == '__main__':
 	app.run(debug = True)
