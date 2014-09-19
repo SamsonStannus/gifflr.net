@@ -210,12 +210,12 @@ body {
 @media (min-width: 768px) {
   /* Pull out the header and footer */
   .masthead {
-    position: relative;
-    top: -30px;
+    position: fixed;
+    top: 0px;
   }
   .mastfoot {
-    position: relative;
-    bottom: -50px;
+    position: fixed;
+    bottom: 0px;
   }
   /* Start the vertical centering */
   .site-wrapper-inner {
@@ -265,22 +265,27 @@ body {
           </div>
 
           <div class="inner cover">
-            <div class="gifs">
+            <!--<div class="gifs">
               <img src="{{tumurl}}">
                 <p>{{tumurl}}<p>
-            </div>
+            </div>-->
     
             <form action="/gifs" method="post" name="stringform">
               <div class="row">
                 <div class="col-xs-12">
                   <div class="input-group input-group-lg">
-                    <input type="text" class="inputs" placeholder="Type something, see what happens..." name="string" class="submit_on_enter">
+                    <input type="text" class="inputs" placeholder="Type something, see what happens..." name="string" class="submit_on_enter" onsubmit="gifFunction">
                      <button type="button" class="btn btn-lg btn-primary"><script language="JavaScript" ><!--
                        var name = "gifflr.net";
                        var domain = "gmail.com";
                        document.write('<a href=\"mailto:' + name + '@' + domain + '\">');
                        document.write("Give Us FeedBack!" + '</a>');
                     // -->
+                   </script>
+                   <script type="text/javascript">
+                    function gifFunction(){
+                      window.open("{{tumurl}}", "{{tumurl}}", "scrollbars=yes, resizable=yes")
+                    }
                    </script>         
                 </button>
                 
