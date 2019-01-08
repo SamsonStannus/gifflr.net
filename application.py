@@ -1,7 +1,8 @@
 import pytumblr, operator
 from flask import Flask, request, redirect, render_template
 from itertools import combinations
-from random import randrange
+from random import randrange, shuffle
+from collections import OrderedDict
 
 app = Flask(__name__)
 
@@ -13,47 +14,46 @@ def index():
 def findGif():
 	try:
 		tumurl = ''
-		tumclient = pytumblr.TumblrRestClient(
-		  'Kjr56gcuNUtyRDZfhy6rsmmv5cUatTzcVlGg2MsDh67Wq23MxM',)
+		tumclient = pytumblr.TumblrRestClient('Kjr56gcuNUtyRDZfhy6rsmmv5cUatTzcVlGg2MsDh67Wq23MxM',)
 		gifstring = request.values.get('string')
 
 		punctuation = '''!()-[]{};:"\,<>./?@#$%^&*_~'''
-		no_punct = ""
-		for char in gifstring:
-		   if char not in punctuation:
-		       no_punct = no_punct + char
-		
-		words = no_punct.split()
+		no_punct = ''.join(char for char in gifstring if char not in punctuation)
+
+		words = [word for word in no_punct.split() if len(word) > 2]
 		finalists = []
 		index = 0
 		posts = {}
 
 		if len(words) > 8:
-			return redirect('/')
-			
-		for num in range(len(words)-1,-1,-1):
+			# to avoid calling tumblr with too many tags take 8 random words
+			shuffle(words)
+			words = words[0:8]
+
+		# iteratively use less and less words till a gif is found with the tags the words
+		for num in range(len(words)-1, -1, -1):
 			for e in combinations(words, num+1):
 				if not finalists:
-					d = ' '.join(elem for elem in e)
-					tumresp = tumclient.tagged(d+' gif')
+					tag = ' '.join(elem for elem in e)
+					tumresp = tumclient.tagged(tag+' gif')
 
-					for x in range(0,len(tumresp)):
+					for x in range(0, len(tumresp)):
 						if 'photos' in tumresp[x]:
-							posts[tumresp[x]['id']] = tumresp[x]['note_count']
+							posts[tumresp[x]['id']] = {
+								'note_count': tumresp[x]['note_count'],
+								'url': tumresp[x]['photos'][0]['original_size']['url']
+							}
 
-					for count in range(0,6):
-						if posts:
-							key = max(posts.iteritems(), key=operator.itemgetter(1))[0]
-							for ind in range(0,len(tumresp)):
-								if key == tumresp[ind]['id']:
-									finalists.append(tumresp[ind])
-									break
-							del posts[key]
+					# get top 6 posts based on note_count
+					if posts:
+						top = sorted(posts.items(), key=lambda x: x[1]['note_count'], reverse=True)[:6]
+						finalists = [d['url'] for _, d in top]
 
+		# get random finalist from the top 6 posts
 		if finalists:
-			index = randrange(0,len(finalists),1)
+			index = randrange(0, len(finalists), 1)
 
-		tumurl = finalists[index]['photos'][0]['original_size']['url']
+		tumurl = finalists[index]
 	except IndexError:
 		tumurl = 'Nope, either there\'s no relevant gif, or tumblr didn\'t like the dirty thing you searched...'
 	except KeyError:
@@ -63,7 +63,6 @@ def findGif():
 	except UnicodeEncodeError:
 		tumurl = 'Nope, either there\'s no relevant gif, or tumblr didn\'t like the dirty thing you searched...'
 
-	# return redirect(tumurl)
 	return render_template('gif.html', tumurl=tumurl, gifstring=gifstring)
 
 if __name__ == '__main__':
