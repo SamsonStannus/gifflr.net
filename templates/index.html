@@ -19,9 +19,11 @@
         } 
 
         .logo {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
             width: 500px;
             height: 200px;
-            margin-left: 100px;
             background: url("{{ url_for('static', filename='gifflr_logo_png.png') }}");
         }
 
@@ -30,8 +32,10 @@
         }
     </style>
     <body>
-        <div class="centered" style="padding-top: 100px">
+        <div style="padding-top: 100px">
             <div class="logo"></div>
+        </div>
+        <div class="centered">
             <div style="padding-top: 50px">
                 <form action="/gifs" method="post" name="stringform">
                     <div class="centered" style="width: 500px">
